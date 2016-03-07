@@ -1,0 +1,22 @@
+.muestra{ 
+    background-color:#008080; 
+    color:#ffffff;}
+#cuadro_servicio{
+	padding: 30px;
+	background-color: #ffffff;
+}
+/*#visado{
+	padding: 30px;
+	background-color: #c9cccc;
+	width: 100%;
+	height: auto;
+}*/
+#sombra{
+	padding: 30px;
+	background-color: #dae0e0;
+	width: 100%;
+	height: auto;
+}
+#tabla_c{
+	background-color: #dae0e0;
+	}

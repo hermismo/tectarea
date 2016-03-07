@@ -1,0 +1,16 @@
+.contenedor_cabecera{
+    background: #008080; 
+    text-align: center; 
+    color: #F9F9FF
+}
+.error_formulario{
+    color:#F00;
+    text-align: justify;
+}
+.formulario{
+    text-align: center;
+    background: #eee;
+}
+.contenedor_formulario{
+    padding: 0px 400px 0px 400px;
+}
