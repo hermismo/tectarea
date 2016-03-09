@@ -2,7 +2,7 @@
 	<strong><h3>Tus precios y servicios | Cédula de habitabilidad</h3> </strong><br>
 	<strong><h4>Comprueba tus precios en el comparador</h4> </strong><br>
 	<strong><h4>Describe tu Servicio<font color="red">(*) </font></h4> </strong><br>
-	<form action="<?= base_url()."negocio/activarServicio"."/".$id."/".$idPersona?>" method="post">
+	<form action="<?= base_url()."negocio/activarServicio"."/".$id."/".$idPersona?>" method="post" id="form">
 		<input type="hidden" id='id_cedula' name="id_servicio">
 							<div id="sombra">
 
@@ -80,15 +80,15 @@
 				
 				<div class="input-group" id="sombra">
 					<label>
-				      <input type="checkbox" name="forma_pago[]" value="1" id="" required> Pago en efectivo el día de la visita
+				      <input type="checkbox" name="forma_pago[]" value="1" id="forma_pago"  Pago en efectivo el día de la visita
 				    </label>
 				    <br>
 				    <label>
-				      <input type="checkbox" name="forma_pago[]" value="2" id="" required> Pago por transferencia a la entrega de la documentación
+				      <input type="checkbox" name="forma_pago[]" value="2" id="forma_pago" > Pago por transferencia a la entrega de la documentación
 				    </label>
 				    <br>
 				    <label>
-				      <input type="checkbox" name="forma_pago[]" value="3" id="" required> Pago fraccionado en dos veces. Por adelantado y a la entrega de la documentación
+				      <input type="checkbox" name="forma_pago[]" value="3" id="forma_pago" > Pago fraccionado en dos veces. Por adelantado y a la entrega de la documentación
 				    </label>
 				    <br>
 				</div>

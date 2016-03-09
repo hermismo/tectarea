@@ -121,11 +121,18 @@ class Tunegocio_model extends CI_Model
 		$id= $this->session->userdata('id_tecnico');
 		#------Servicios Activos
 		$sql1=$this->db->query('SELECT s.id_servicio, s.nombre_servicio, e.nombre_estatus from servicio as s, servicio_tecnico as st, estatus as e where s.id_servicio=st.id_servicio and e.id_estatus=st.id_estatus and e.nombre_estatus="Activo" and st.id_tecnico='.$id.' GROUP by s.nombre_servicio');
+		#echo 'SELECT s.id_servicio, s.nombre_servicio, e.nombre_estatus from servicio as s, servicio_tecnico as st, estatus as e where s.id_servicio=st.id_servicio and e.id_estatus=st.id_estatus and e.nombre_estatus="Activo" and st.id_tecnico='.$id.' GROUP by s.nombre_servicio';
+		#echo "<br>";
 		#------Servicios Desactivados
 		$sql2=$this->db->query('SELECT s.id_servicio, s.nombre_servicio, e.nombre_estatus from servicio as s, servicio_tecnico as st, estatus as e where s.id_servicio=st.id_servicio and e.id_estatus=st.id_estatus and e.nombre_estatus="Inactivo" and st.id_tecnico='.$id.' GROUP by s.nombre_servicio');
+		#echo 'SELECT s.id_servicio, s.nombre_servicio, e.nombre_estatus from servicio as s, servicio_tecnico as st, estatus as e where s.id_servicio=st.id_servicio and e.id_estatus=st.id_estatus and e.nombre_estatus="Inactivo" and st.id_tecnico='.$id.' GROUP by s.nombre_servicio';
 		#------Servicios nunca activados
+
+		$sql3=$this->db->query('SELECT s.id_servicio, s.nombre_servicio, e.nombre_estatus from servicio as s, servicio_tecnico as st, estatus as e where s.id_servicio=st.id_servicio and e.id_estatus=st.id_estatus and st.id_tecnico='.$id.' GROUP by s.nombre_servicio');
 		$string=array();
-		foreach ($sql1->result() as $fila) {$string[]=$fila->id_servicio;} $ids= implode($string,',');	
+		foreach ($sql3->result() as $fila) {$string[]=$fila->id_servicio;} $ids= implode($string,',');	
+	
+
 				if ($ids > 0)
 			$sql3=$this->db->query('SELECT servicio.nombre_servicio,servicio.id_servicio from servicio, servicio_tecnico where servicio.id_servicio not in ('.$ids.') and servicio_tecnico.id_tecnico='.$id.' GROUP by servicio.id_servicio');
 			else
@@ -503,6 +510,48 @@ class Tunegocio_model extends CI_Model
 		
 		return $sql->result();
 	}
+	function buscarPoblacion($parametro){
+
+		$sql=$this->db->query('select * from poblacion where nombre_zona like "%%%'.$parametro.'%%%" ');
+		#echo "select * from poblacion where nombre_zona like "%'.$parametro.'%" ";
+		if ($sql->num_rows() > 0) {
+					
+			foreach ($sql->result() as $fila) {
+				
+	            $datos[]= $fila->nombre_zona;
+	        }
+	       return $datos;
+        }
+        else{
+        	$datos[]='vacio';
+        	return $datos;
+        	}
+       		
+		}
+
+	function buscarCoordenadasBD($parametro){
+		$sql=$this->db->query("SELECT REPLACE(latitud , ',' , '.') as latitud, REPLACE(longitud , ',' , '.') as longitud  from poblacion where nombre_zona='".$parametro."' limit 1");
+		
+		return $sql->result();
+	}
+
+	function guardarUbicacion($parametro){
+
+	
+		$this->db->query('INSERT INTO ubicacion (id_poblacion, id_tecnico) VALUES ((select id_poblacion from poblacion where nombre_zona="'.$parametro.'" ), '.$this->session->userdata('id_tecnico').') ');
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}else
+			return false;
+	}	
+
+	function CargarUbicacionesBD($parametro){
+		$sql=$this->db->query("SELECT poblacion.id_poblacion, REPLACE(latitud , ',' , '.') as latitud, REPLACE(longitud , ',' , '.') as longitud , nombre_zona from poblacion,ubicacion where poblacion.id_poblacion=ubicacion.id_poblacion and ubicacion.id_tecnico=".$parametro." ");
+		
+		return $sql->result();
+	}
+	
 	/*function insertarS($datos){
 
 			$log_precio=count($datos['precio'])/24;

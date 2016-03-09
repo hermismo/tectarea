@@ -2,7 +2,7 @@
     $(document).ready(function(){
       map = new GMaps({
         el: '#map',
-        zoom: 6,
+        zoom: 5,
         lat: 40.40911993,
         lng: -3.8271738
       });

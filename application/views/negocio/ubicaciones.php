@@ -1,4 +1,21 @@
 <?php include('menu_lateral.php');?>
+<style>
+.ui-autocomplete {
+            max-height: 300px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+    }
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+
+</style>
   <!-- breadcumbs-->
                         <div><h6>
             <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
@@ -12,8 +29,8 @@
 <strong><h4>Tu Disponibilidad<font color="red">(*) </font></h4> </strong><br>
 <div id="tabla_ubicaciones"> 
 	<form action="<?= base_url()."negocio/disponibilidad"."/".$id."/".$idPersona?>" method="post" id="form"> 
-	<div class="table-responsive">
-	<table class="table">
+	<div class="table-responsive" id="">
+	<table class="table table-bordered" >
 		<thead>
 			<tr>
 				<th></th>
@@ -73,18 +90,22 @@
     <hr>
     <strong><h4>Tus ubicaciones<font color="red">(*) </font></h4> </strong><br>
 <!--MAPA DE UBICACIONES-->
-<div class="span11">
+<div class="span11" id="sombra">
+	<p>Introduce los la población o zona donde siempre quieres aparecer. </p>
       <form method="post" id="geocoding_form">
-        <label for="address">Dirección:</label>
+        
         <div class="input">
-          <input type="text" id="address" class=""  size="50" name="address" />
-          <input type="submit" class="btn btn-primary" value="Buscar" />
+        <label for="address">Población: </label>
+          <input type="text" id="poblacion" class=""  size="50" name="address" /><input type="button" class="btn btn-primary" id="buscar" value="Guardar" />
+          
         </div>
+        <div class="mensaje2"></div>
       </form>
       <br>
       <div id="map"></div>
-    </div><br><br>
-    <button type="submit" class="btn btn-primary btn-lg" name="boton_s" value="Modificar">Guardar Ubicación</button>
+      
+    </div><div class="" id="tabla_ubicacion"></div><br><br>
+    
 <!--FINMAPA DE UBICACIONES-->
 	<hr><br><br>
 

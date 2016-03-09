@@ -1,24 +1,15 @@
-<?php 
 
-        if ( $this->session->userdata('mensaje') != '' ){
-    ?>
     <div class="mensaje">
-        <?php echo $this->session->userdata('mensaje'); 
-        $this->session->set_userdata('mensaje', '');?>
+        <?php 
+        if ( $this->session->userdata('mensaje') != '' ){
+        echo $this->session->userdata('mensaje'); 
+        $this->session->set_userdata('mensaje', '');
+         } 
+        ?>
     </div>
-    <?php 
-    } 
-    ?>
+   
     <input type="hidden" id='id_tecnico' value='<?php echo $idPersona; ?>'>
-   <!-- <div class="row">
-    <div class="span11">
-      <div id="map"></div>
-    </div>
-    <div class="span6">
-      <p>Ubicaciones:</p>
-      
-    </div>
-  </div>-->
+   <input type="hidden" id='ruta' value='<?php echo base_url(); ?>'>
 <div>
     <div class="row"><!--Menú izquierda-->
         <div class="col-sm-3">

@@ -52,6 +52,7 @@
                 }*/
                 ?>    
                 <?php 
+               
                 for ($i=0; $i < count($servicio['inactivos']); $i++) { 
                    
                    if ($servicio['inactivos'])

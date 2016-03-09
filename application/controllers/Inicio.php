@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inicio extends CI_Controller {
-    //private $session_id;
+    
+
     function __construct() {
         parent::__construct();
         $this->load->library(array('ion_auth'));
@@ -54,20 +55,24 @@ class Inicio extends CI_Controller {
         $this->layout->setTitle('Tu negocio');
          $id=  $this->uri->segment(3);
         $idPersona= $this->uri->segment(4);
+        if ( $this->session->userdata('id_tecnico') == '') {
+            redirect ('login','refresh' );
+        }
+       
         if(!$id || !$idPersona){
             show_404();  
         }
         else{
             $this->layout->css(array(base_url().'public/css/cuentaTecnico.css'));
             $this->layout->js(array(base_url().'public/js/negocio/negocioTecnico.js'));
-            $this->layout->js(array(base_url().'public/js/negocio/cargarNegocioTecnico.js'));
+            #$this->layout->js(array(base_url().'public/js/negocio/cargarNegocioTecnico.js'));
             $this->layout->js(array(base_url().'public/js/funciones.js'));
 
-            $this->layout->js(array('http://maps.google.com/maps/api/js?sensor=true'));
+            /*$this->layout->js(array('http://maps.google.com/maps/api/js?sensor=true'));
             $this->layout->js(array(base_url().'public/js/map/gmaps.js'));
             $this->layout->js(array(base_url().'public/js/map/carga.js'));
             $this->layout->css(array('http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css'));
-            $this->layout->css(array(base_url().'public/js/map/examples.css'));
+            $this->layout->css(array(base_url().'public/js/map/examples.css'));*/
            
             $this->layout->view('index',compact('id','idPersona'));
             $tipologia=$this->tuNegocio_model->tipologia();
@@ -164,7 +169,7 @@ class Inicio extends CI_Controller {
             $this->layout->setTitle('Tu negocio | Servicios');
             $this->layout->css(array(base_url().'public/css/cuentaTecnico.css'));
             $this->layout->js(array(base_url().'public/js/negocio/negocioTecnico.js'));
-            $this->layout->js(array(base_url().'public/js/negocio/cargarNegocioTecnico.js'));
+            #$this->layout->js(array(base_url().'public/js/negocio/cargarNegocioTecnico.js'));
             $this->layout->js(array(base_url().'public/js/funciones.js'));
             $this->layout->view('index',compact('id','idPersona'));
             
@@ -201,6 +206,7 @@ class Inicio extends CI_Controller {
             
             $this->layout->css(array(base_url().'public/css/cuentaTecnico.css'));
             $this->layout->js(array(base_url().'public/js/negocio/negocioTecnico.js'));
+            $this->layout->js(array(base_url().'public/js/negocio/autocomplete.js'));
             $this->layout->js(array('http://maps.google.com/maps/api/js?sensor=true'));
            $this->layout->js(array(base_url().'public/js/map/gmaps.js'));
             $this->layout->js(array(base_url().'public/js/map/carga.js'));

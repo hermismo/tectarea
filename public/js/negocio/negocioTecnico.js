@@ -1,6 +1,11 @@
 $(document).ready(function(){
 //$("#precio").css("color", "red"); 
 $("#form").submit(function(){
+
+    /*if ($('#forma_pago').is(':checked') == false){
+
+        alert();
+    }*/
     var pregunta= confirm ("Desea continual?");
     if (pregunta)
         return true;
@@ -147,7 +152,7 @@ function cargarCertificados(id){
     this.ruta=$('#ruta').val();
 
     $.ajax({
-        url: "http://localhost/proyecto-tectarea/negocio/cargarCertificados",
+        url: this.ruta+"negocio/cargarCertificados",
         type:"POST",
         data:{buscar: id},
         success:function(respuesta){

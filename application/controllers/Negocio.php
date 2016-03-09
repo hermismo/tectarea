@@ -132,8 +132,8 @@ class Negocio extends CI_Controller {
      }
 
      function cargarCertificados(){
-
-        $certificados=$this->tuNegocio_model->buscarCertificado($this->input->post("buscar"));
+        $id_persona=$_POST['buscar'];
+        $certificados=$this->tuNegocio_model->buscarCertificado($id_persona);
             echo json_encode($certificados);
      }
 
